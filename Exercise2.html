@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Exercise 2</title>
+<script>
+window.onload = function(e){  
+
+      
+    var filu = new XMLHttpRequest();
+      var url = 'team.json';
+       
+  
+        filu.onload=function() {
+            parseResponseData(filu.responseText);
+        };
+      
+         filu.open('GET', url, true);
+         
+         filu.send(); 
+
+    function parseResponseData(response) {
+        
+        var arr = JSON.parse(response);
+
+        var out = "<table border='1'>\n";
+        out += "<tr><th>id</th><th>Team</th><th>Shortcut</th><th>logo</th></tr>\n";
+   out += "<tr><td>"
+           
+        for(i = 0; i < arr.length; i++) { // 
+            out += "<tr><td>" +
+			arr[i].id + "</td><td>" +
+            arr[i].name + "</td><td>" +
+			arr[i].shortName + "</td><td>" + "<img src="+arr[i].crestUrl+" style=width:100px;height:100px;>" +
+             "</td><tr>" ;
+			
+		
+
+			
+            
+
+        }
+        out += "</table>\n"
+        document.getElementById("team").innerHTML = out; 
+    }
+}
+</script>
+</head>
+<body>
+<script src="team.json";></script>
+
+<div id="team"></div>
+</body>
+
+<html>

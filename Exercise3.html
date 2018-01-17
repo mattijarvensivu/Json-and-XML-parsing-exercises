@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Exercise 3</title>
+<script>
+window.onload = function(e){  
+
+      
+    var filu = new XMLHttpRequest();
+      var url = 'data.json';
+       
+  
+        filu.onload=function() {
+            parseResponseData(filu.responseText);
+        };
+      
+         filu.open('GET', url, true);
+         
+         filu.send(); 
+
+    function parseResponseData(response) {
+        
+        var arr = JSON.parse(response);
+
+        var out = "<table border='1'>";
+		out += "<h1>"+arr.leagueTable.competition+"</h1>"
+		out += "<h2>"+arr.leagueTable.description+"</h2>"
+        out += "<tr><th>position</th><th>Name</th><th>Played</th><th>Goal diff</th><th>Points</th></tr>\n";
+   //out += "<tr><td>"
+           
+        for(i = 0; i < arr.leagueTable.team.length; i++) { // 
+            out += "<tr><td>" +
+			arr.leagueTable.team[i].position + "</td><td>" +
+            arr.leagueTable.team[i].name + "</td><td>" +
+			arr.leagueTable.team[i].played + "</td><td>" +
+			 arr.leagueTable.team[i].goalDifference + "</td><td>" + 
+			 arr.leagueTable.team[i].points + "</td></tr>" ;
+             
+			
+		
+
+			
+            
+
+        }
+        out += "</table>\n"
+        document.getElementById("data").innerHTML = out; 
+    }
+}
+</script>
+</head>
+<body>
+<script src="data.json";></script>
+
+<div id="data"></div>
+</body>
+
+<html>

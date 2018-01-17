@@ -1,0 +1,62 @@
+<html>
+<head><title>Exercise 1</title>
+
+<script>
+
+window.onload = function(e){  
+
+      
+    var filu = new XMLHttpRequest();
+      var url = 'JSON.json';
+       
+  
+        filu.onload=function() {
+            parseResponseData(filu.responseText);
+        };
+      
+         filu.open('GET', url, true);
+         
+         filu.send(); 
+
+    function parseResponseData(response) {
+        
+        var arr = JSON.parse(response);
+ var out = "<h1>" + arr.recordsTeam.team + "</h1> \n <h2>" +
+            arr.recordsTeam.description + "</h2>\n" ;
+         out += "<table border='1'>\n";
+        out += "<tr><th>Description</th><th>Type</th><th>Date</th><th>Attendance</th><th>Match</th></tr>\n";
+   out += "<tr><td>"
+           
+        for(i = 0; i < arr.recordsTeam.record.length; i++) { // 
+            out += "<tr><td>" +
+            arr.recordsTeam.record[i].description + "</td><td>" +
+			arr.recordsTeam.record[i].type + "</td><td>" +
+            arr.recordsTeam.record[i].match.date + "</td><td>" +
+			arr.recordsTeam.record[i].match.attendance + "</td><td>" +
+			arr.recordsTeam.record[i].match.homeTeam + "-" +
+			arr.recordsTeam.record[i].match.awayTeam + "(" +
+			arr.recordsTeam.record[i].match.homeTeamScore + "-"+
+			arr.recordsTeam.record[i].match.awayTeamScore +")"+"</td></tr>\n"
+
+			+ "</td></tr>\n" ;
+            
+
+        }
+        out += "</table>\n"
+        document.getElementById("json").innerHTML = out; 
+    }
+}
+</script>
+
+
+</head>
+
+<body>
+<script src="JSON.json";></script>
+
+<div id="json"></div>
+
+
+</body>
+
+</html>
